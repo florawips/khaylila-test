@@ -1,0 +1,362 @@
+/* ===== NAVBAR ===== */
+.navbar-app {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #ff6fa5, #ff9ec4 60%, #ffc2dd) !important;
+    box-shadow: 0 4px 20px rgba(255, 111, 165, 0.25);
+    padding: 0.85rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.navbar-app .navbar-brand {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #fff !important;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-app .navbar-brand img {
+    height: 38px;
+    width: auto;
+}
+.navbar-app .navbar-nav {
+    gap: 0.4rem;
+}
+
+.navbar-app .nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 0.5rem 1.15rem !important;
+    border-radius: 999px;
+    transition: all 0.25s ease;
+}
+
+.navbar-app .nav-link:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff !important;
+}
+
+.navbar-app .nav-link.active {
+    background: #fff;
+    color: #e6417f !important;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.navbar-app .navbar-toggler {
+    border: none;
+    box-shadow: none !important;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-app .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ===== ALERT ===== */
+.alert-app {
+    font-family: 'Fredoka', sans-serif;
+    border: none;
+    border-radius: 12px;
+    margin: 1.25rem 2rem 0;
+    padding: 0.9rem 1.25rem;
+    font-size: 0.9rem;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.alert-app.alert-success {
+    background: #eafaf0;
+    color: #1e7e4b;
+    border-left: 4px solid #2ecc71;
+}
+
+.alert-app.alert-danger {
+    background: #fdecea;
+    color: #b3261e;
+    border-left: 4px solid #e74c3c;
+}
+
+.alert-app strong {
+    margin-right: 0.4rem;
+}
+
+
+.konten-siswa {
+    font-family: 'Fredoka', sans-serif;
+}
+
+.konten-siswa h2 {
+    font-weight: 400;
+    color: #2b2d42;
+}
+
+.table-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: 1.25rem;
+}
+
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-siswa {
+    margin-bottom: 0;
+}
+
+.table-siswa thead {
+    background: linear-gradient(90deg, #4361ee, #4895ef);
+}
+
+.table-siswa thead th {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: none;
+    padding: 0.9rem 0.75rem;
+    white-space: nowrap;
+}
+
+.table-siswa tbody tr {
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.table-siswa tbody tr:hover {
+    background: #f0f4ff;
+    transform: scale(1.002);
+}
+
+.table-siswa tbody td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.table-siswa tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-siswa .badge {
+    padding: 0.5rem 0.6rem;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    margin-right: 2px;
+    transition: opacity 0.2s;
+    border: none;
+}
+
+.table-siswa .badge:hover {
+    opacity: 0.8;
+}
+
+.btn-tambah {
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 0.45rem 1rem;
+}
+
+.toolbar-siswa .form-control,
+.toolbar-siswa .form-select {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.toolbar-siswa .form-control:focus,
+.toolbar-siswa .form-select:focus {
+    border-color: #4895ef;
+    box-shadow: 0 0 0 0.15rem rgba(72,149,239,0.15);
+    outline: none;
+}
+
+.badge-gender-l {
+    background: #4361ee;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+}
+
+.badge-gender-p {
+    background: #f72585;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+}
+
+.pagination .page-link {
+    border-radius: 8px;
+    margin: 0 2px;
+    border: none;
+    color: #4361ee;
+}
+
+.pagination .page-item.active .page-link {
+    background: #4361ee;
+    color: #fff;
+}
+
+/* ===== FORM CARD ===== */
+.form-card {
+    font-family: 'Fredoka', sans-serif;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.form-card .card-header {
+    background: linear-gradient(90deg, #4361ee, #4895ef);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-bottom: none;
+}
+
+.form-card .card-header h4 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-card .card-header .btn-kembali {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.form-card .card-header .btn-kembali:hover {
+    background: rgba(255,255,255,0.35);
+    color: #fff;
+}
+
+.form-card .card-body {
+    padding: 1.75rem;
+}
+
+.form-card .form-label {
+    font-weight: 500;
+    color: #2b2d42;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+.form-card .form-control,
+.form-card .form-select,
+.form-card textarea {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-card .form-control:focus,
+.form-card .form-select:focus,
+.form-card textarea:focus {
+    border-color: #4895ef;
+    box-shadow: 0 0 0 0.15rem rgba(72,149,239,0.15);
+    outline: none;
+}
+
+.form-card .btn-simpan {
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+}
+
+.form-card .btn-reset {
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+}
+
+/* ===== DETAIL / SHOW CARD ===== */
+.detail-card {
+    font-family: 'Fredoka', sans-serif;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.detail-card .card-header {
+    background: linear-gradient(90deg, #4361ee, #4895ef);
+    color: #fff;
+    padding: 1.1rem 1.5rem;
+    border-bottom: none;
+}
+
+.detail-card .card-header h4 {
+    font-weight: 600;
+    color: #fff;
+}
+
+.detail-card .btn-ubah {
+    background: #ffb703;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.detail-card .btn-ubah:hover {
+    opacity: 0.85;
+    color: #fff;
+}
+
+.detail-card .btn-kembali {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.detail-card .btn-kembali:hover {
+    background: rgba(255,255,255,0.35);
+    color: #fff;
+}
+
+.detail-card .card-body {
+    padding: 1.5rem;
+}
+
+.detail-table {
+    margin-bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.detail-table th {
+    background: #f5f7fb;
+    color: #2b2d42;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-color: #eef0f5;
+}
+
+.detail-table td {
+    font-size: 0.9rem;
+    color: #333;
+    border-color: #eef0f5;
+}
