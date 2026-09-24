@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuruRequest;
 use App\Models\Guru;
+use App\Models\MapelGuru;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -81,5 +82,11 @@ class GuruController extends Controller
         } else {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data.');
         }
+    }
+    public function mapel(string $id){
+        $data = MapelGuru::where('guru_id', $id)
+        ->with('mapel')
+        ->get();
+        return view('admin.konten.guru.mapel', compact('data'));
     }
 }

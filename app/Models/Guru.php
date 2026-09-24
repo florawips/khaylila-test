@@ -16,4 +16,9 @@ class Guru extends Model
         'no_hp',
         'email',
     ];
+
+public function mapel()
+{
+    return $this->belongsToMany(Mapel::class, 'mapel_gurus');
+}
 }

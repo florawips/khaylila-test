@@ -19,4 +19,8 @@ class Siswa extends Model
         'alamat',
         'no_hp',
     ];
+
+    public function kegiatan(){
+        return $this->hasMany(Kegiatan::class);
+    }
 }

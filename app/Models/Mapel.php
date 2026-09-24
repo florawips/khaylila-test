@@ -10,4 +10,8 @@ class Mapel extends Model
         'nama_mapel',
         'jumlah_jam',
     ];
+    public function guru()
+{
+    return $this->belongsToMany(Mapel::class, 'guru_gurus');
+}
 }

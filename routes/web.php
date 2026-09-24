@@ -2,6 +2,8 @@
 
 
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaController;
@@ -29,6 +31,9 @@ Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     Route::delete('/{id}', [SiswaController::class, 'delete'])->name('delete');
 });
 
+Route::get('/guru/mapel/{id}', [GuruController::class, 'mapel']) ->name('guru.mapel');
+Route::get('/mapel/guru/{id}', [MapelController::class, 'guru']) ->name('mapel.guru');
 Route::resource('mapel', MapelController::class);
 Route::resource('guru', GuruController::class);
-
+Route::resource('jadwal', JadwalController::class);
+Route::resource('kegiatan', KegiatanController::class);

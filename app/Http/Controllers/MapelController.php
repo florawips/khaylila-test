@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MapelRequest;
 use App\Models\Mapel;
+use App\Models\MapelGuru;
 use Illuminate\Http\Request;
 
 class MapelController extends Controller
@@ -98,4 +99,10 @@ class MapelController extends Controller
  }
     }
 
+    public function guru(string $id){
+      $data = MapelGuru::where('mapel_id', $id)
+      ->with('guru')
+      ->get();
+      return view('admin.konten.mapel.guru', compact('data'));
+  }
 }

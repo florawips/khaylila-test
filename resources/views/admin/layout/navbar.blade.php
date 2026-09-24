@@ -23,6 +23,12 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ route('guru.index') }}">Data Guru</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ route('jadwal.index') }}">Data Jadwal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ route('kegiatan.index') }}">Data Kegiatan</a>
+      </li>
         </ul>
       </div>
     </div>
