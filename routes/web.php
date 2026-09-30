@@ -9,7 +9,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/siswa', [SiswaController::class, 'index']) ->name('siswa.index'); 
+Route::get('/', [LandingController::class, 'index'])->name('landing.index');
 Route::get('/siswa/create', [SiswaController::class, 'create']) ->name('siswa.create'); 
 
 Route::group(['prefix'=>'landing','as'=>'landing.'], function(){
@@ -26,6 +26,7 @@ Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     Route::get('/create', [SiswaController::class, 'create'])->name('create');
     Route::post('/', [SiswaController::class, 'store'])->name('store');
     Route::get('/{id}', [SiswaController::class, 'show'])->name('show');
+    Route::post('/{id}/upload', [SiswaController::class, 'upload'])->name('upload');
     Route::get('/{id}/edit', [SiswaController::class, 'edit'])->name('edit');
     Route::put('/{id}', [SiswaController::class, 'update'])->name('update');
     Route::delete('/{id}', [SiswaController::class, 'delete'])->name('delete');
@@ -35,5 +36,6 @@ Route::get('/guru/mapel/{id}', [GuruController::class, 'mapel']) ->name('guru.ma
 Route::get('/mapel/guru/{id}', [MapelController::class, 'guru']) ->name('mapel.guru');
 Route::resource('mapel', MapelController::class);
 Route::resource('guru', GuruController::class);
+Route::post('/{id}/upload', [GuruController::class, 'upload'])->name('guru.upload');
 Route::resource('jadwal', JadwalController::class);
 Route::resource('kegiatan', KegiatanController::class);

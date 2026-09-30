@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
-   // GET
-   public function index()
-   {
-       return "Menampilkan data mahasiswa";
-   }
+    // GET
+  public function index()
+  {
+    return view('landing.konten.index');
+  }
    // POST
    public function store(Request $request)
    {

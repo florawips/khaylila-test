@@ -21,4 +21,7 @@ public function mapel()
 {
     return $this->belongsToMany(Mapel::class, 'mapel_gurus');
 }
+public function foto(){
+    return $this->morphOne(Foto::class, 'imageable');
+}
 }

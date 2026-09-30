@@ -23,4 +23,7 @@ class Siswa extends Model
     public function kegiatan(){
         return $this->hasMany(Kegiatan::class);
     }
+    public function foto(){
+        return $this->morphOne(Foto::class, 'imageable');
+    }
 }

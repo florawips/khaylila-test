@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SiswaRequest;
+use App\Http\Requests\UploadRequest;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
@@ -87,5 +90,40 @@ class SiswaController extends Controller
         } else {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data.');
         }
+    }
+    public function upload(UploadRequest $request, string $id){
+        $query = Siswa::findOrFail($id);
+        if ($request->hasFile('foto')) {
+            $gambar_mentah = $request->file('foto');
+            $nama_mentah = 'siswa_' . Str::uuid();
+            $format_gambar = $gambar_mentah->getClientOriginalExtension();
+            $gambar_matang = $nama_mentah . '.' . $format_gambar;
+            $lokasi_gambar = $gambar_mentah->storeAs(
+                    'upload/siswa',
+                $gambar_matang,
+                'dir_public'
+            );
+        } else {
+                $lokasi_gambar = '';
+        }
+        // Jika siswa sudah memiliki foto
+        if ($query->foto) {
+            // Hapus file foto lama
+            Storage::disk('dir_public')->delete(
+                $query->foto->path
+            );
+            // Update data foto
+            $query->foto->update([
+                'path' => $lokasi_gambar,
+                'nama_file' => $gambar_matang ?? null,
+            ]);
+        } else {
+            // Jika siswa belum memiliki foto
+            $query->foto()->create([
+                'path' => $lokasi_gambar,
+                'nama_file' => $gambar_matang ?? null,
+            ]);
+        }
+        return redirect()->back()->with('success', 'Foto berhasil diupload.');
     }
 }

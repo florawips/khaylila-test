@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuruRequest;
+use App\Http\Requests\UploadRequest;
 use App\Models\Guru;
 use App\Models\MapelGuru;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GuruController extends Controller
 {
@@ -88,5 +91,40 @@ class GuruController extends Controller
         ->with('mapel')
         ->get();
         return view('admin.konten.guru.mapel', compact('data'));
+    }
+    public function upload(UploadRequest $request, string $id){
+        $query = Guru::findOrFail($id);
+        if ($request->hasFile('foto')) {
+            $gambar_mentah = $request->file('foto');
+            $nama_mentah = 'guru_' . Str::uuid();
+            $format_gambar = $gambar_mentah->getClientOriginalExtension();
+            $gambar_matang = $nama_mentah . '.' . $format_gambar;
+            $lokasi_gambar = $gambar_mentah->storeAs(
+                    'upload/guru',
+                $gambar_matang,
+                'dir_public'
+            );
+        } else {
+                $lokasi_gambar = '';
+        }
+        // Jika guru sudah memiliki foto
+        if ($query->foto) {
+            // Hapus file foto lama
+            Storage::disk('dir_public')->delete(
+                $query->foto->path
+            );
+            // Update data foto
+            $query->foto->update([
+                'path' => $lokasi_gambar,
+                'nama_file' => $gambar_matang ?? null,
+            ]);
+        } else {
+            // Jika guru belum memiliki foto
+            $query->foto()->create([
+                'path' => $lokasi_gambar,
+                'nama_file' => $gambar_matang ?? null,
+            ]);
+        }
+        return redirect()->back()->with('success', 'Foto berhasil diupload.');
     }
 }
