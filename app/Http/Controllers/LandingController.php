@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -9,7 +10,8 @@ class LandingController extends Controller
     // GET
   public function index()
   {
-    return view('landing.konten.index');
+    $siswa = Siswa::all();
+    return view('landing.konten.index', compact('siswa'));
   }
    // POST
    public function store(Request $request)

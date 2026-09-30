@@ -299,62 +299,34 @@
 </section>
 <!-- END PORTFOLIO -->
 
-<!-- START TEAM US -->
+<<!-- START TEAM US -->
 <section id="team" class="our_team section-padding">
     <div class="container">
         <div class="section-title text-center wow zoomIn">
-            <h2>Professional team</h2>
+            <h2>Best XI PPLG 1</h2>
             <div></div>
         </div>
+
         <div class="row text-center">
+            @foreach ($siswa as $sw)
             <div class="col-lg-3 col-sm-3 col-xs-12">
                 <div class="single_team">
-                    <img src="{{ asset('landing/assets/img/team/team-1.jpg') }}" class="img-fluid" alt="" />
-                    <h3>Juthi Ahmed</h3>
-                    <p>Co Founder</p>
-                    <ul class="list-inline">
-                        <li><a href="#" class="st-facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="st-twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="st-instagram"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
+                    @if ($sw->foto)
+                    <img src="{{ asset($sw->foto->path) }}" class="img-fluid" alt="" />
+                    @else
+                    <div class="text-muted img-fluid d-flex justify-content-center align-items-center" style="width: 100%; height: 200px;">
+                        Tidak ada foto
+                    </div>
+                    @endif
+                    <h3>{{ $sw->nama_siswa }}</h3>
+                    <p>{{ $sw->alamat }}</p>
                 </div>
-            </div><!--- END COL -->
-            <div class="col-lg-3 col-sm-3 col-xs-12">
-                <div class="single_team">
-                    <img src="{{ asset('landing/assets/img/team/team-2.jpg') }}" class="img-fluid" alt="" />
-                    <h3>Masum Billah</h3>
-                    <p>Co Founder</p>
-                    <ul class="list-inline">
-                        <li><a href="#" class="st-facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="st-twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="st-instagram"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div><!--- END COL -->
-            <div class="col-lg-3 col-sm-3 col-xs-12">
-                <div class="single_team">
-                    <img src="{{ asset('landing/assets/img/team/team-3.jpg') }}" class="img-fluid" alt="" />
-                    <h3>Syed Ekram</h3>
-                    <p>Co Founder</p>
-                    <ul class="list-inline">
-                        <li><a href="#" class="st-facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="st-twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="st-instagram"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div><!--- END COL -->
-            <div class="col-lg-3 col-sm-3 col-xs-12">
-                <div class="single_team">
-                    <img src="{{ asset('landing/assets/img/team/team-4.jpg') }}" class="img-fluid" alt="" />
-                    <h3>Hanjala Haque</h3>
-                    <p>Co Founder</p>
-                    <ul class="list-inline">
-                        <li><a href="#" class="st-facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="st-twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="st-instagram"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div><!--- END COL -->
+            </div><!-- END COL -->
+            @endforeach
+        </div><!-- END ROW -->
+    </div>
+</section>
+<!-- END TEAM US -->
         </div><!--- END ROW -->
     </div><!--- END CONTAINER -->
 </section>

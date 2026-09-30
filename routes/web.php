@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KegiatanController;
@@ -20,7 +20,9 @@ Route::group(['prefix'=>'landing','as'=>'landing.'], function(){
     Route::delete('/{id}', [LandingController::class, 'delete'])->name('delete');
     Route::get('/test', [LandingController::class, 'test_route'])->name('test');
 });
-
+Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
+    Route::get('/login', [AuthController::class, 'login']) ->name('login');
+});
 Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     Route::get('/', [SiswaController::class, 'index'])->name('index');
     Route::get('/create', [SiswaController::class, 'create'])->name('create');
