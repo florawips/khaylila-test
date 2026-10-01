@@ -18,6 +18,10 @@ return new class extends Migration
             $table->enum('jenis_kelamin',['L', 'P']);
             $table->string('no_hp')->nullable();
             $table->string('email')->nullable();
+            $table->foreignId('user_id')
+                    ->nullable()
+                    ->constrained('users')
+                    ->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
             $table->string('nip_active')

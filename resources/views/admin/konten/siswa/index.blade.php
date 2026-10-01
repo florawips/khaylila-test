@@ -57,6 +57,10 @@
                         @forelse($data as $siswa)
                         <tr>
                             <td class="text-nowrap">
+                                <button type="button" class="bagde bg-warning text-decoration
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Upload
+                                </button>
                                 <a href="{{ route('siswa.show', $siswa->id) }}" class="badge bg-success text-decoration-none">
                                     <i class="icon-eye-open"></i>
                                 </a>

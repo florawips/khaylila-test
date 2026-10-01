@@ -22,6 +22,10 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->text('alamat')->nullable();
             $table->string('no_hp')->nullable();
+            $table->foreignId('user_id')
+                    ->nullable()
+                    ->constrained('users')
+                    ->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
             // Unique hanya untuk data yang belum dihapus

@@ -20,7 +20,7 @@
                     <div class="form-group col-md-25 mb-10">
                         <button class="btn btn-contact-bg" type="submit" name="submit">login</button>
                     </div>
-                    <p>Belum punya akun? Daftar</p>
+                    <p>Belum punya akun?<a href="#">Daftar</a></p>
                 </div>
             </div><!--- END COL -->
         </div><!--- END ROW -->
