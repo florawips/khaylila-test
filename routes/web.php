@@ -10,7 +10,7 @@ use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.index');
-Route::get('/siswa/create', [SiswaController::class, 'create']) ->name('siswa.create'); 
+
 
 Route::group(['prefix'=>'landing','as'=>'landing.'], function(){
     Route::get('/', [LandingController::class, 'index'])->name('index');

@@ -8,6 +8,6 @@ class AuthController extends Controller
 {
     public function login()
     {
-        
+        return view ('landing.auth.login');
     }
 }
