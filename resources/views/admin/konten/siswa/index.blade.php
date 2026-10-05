@@ -57,13 +57,10 @@
                         @forelse($data as $siswa)
                         <tr>
                             <td class="text-nowrap">
-                                <button type="button" class="bagde bg-warning text-decoration
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Upload
+                                <button type="button" class="badge bg-warning text-decoration-none"
+                                    data-bs-toggle="modal" data-bs-target="#User{{ $siswa->id }}">
+                                    <i class="icon-user"></i>
                                 </button>
-                                <a href="{{ route('siswa.show', $siswa->id) }}" class="badge bg-success text-decoration-none">
-                                    <i class="icon-eye-open"></i>
-                                </a>
                                 <a href="{{ route('siswa.edit', $siswa->id) }}" class="badge bg-info text-decoration-none">
                                     <i class="icon-pencil"></i>
                                 </a>
@@ -103,6 +100,50 @@
             </div>
         </div>
 
+<div class="modal fade" id="User{{ $siswa->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="User{{ $siswa->id }}">Penerbitan Akun</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form
+            action="{{ route('auth.registrasi' $siswa->id) }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+            @csrf
+            @method('PUT')
+            <div class="mb-3">
+
+                <label for="foto" class="form-label">
+                    Upload Foto
+                </label>
+                <img id="preview" src="#" alt="Preview Foto Kue" style="max-width: 300px; display: none; margin: 20px auto" />
+                <input
+                    type="file"
+                    name="foto"
+                    id="foto"
+                    class="form-control"
+                    accept="image/jpeg,image/png,image/jpg,image/webp"
+                    onchange="previewFoto(event)"
+                >
+                @error('foto')
+                    <div class="text-danger mt-1">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
         <div class="d-flex justify-content-end mt-3">
             {{ $data->appends(['per_page' => $perPage])->links() }}
         </div>
