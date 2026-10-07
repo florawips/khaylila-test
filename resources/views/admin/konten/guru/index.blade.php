@@ -25,13 +25,9 @@
 
                 <label for="per_page" class="me-2 mb-0 small text-muted">Tampilkan:</label>
                 <select name="per_page" id="per_page" onchange="this.form.submit()" class="form-select form-select-sm" style="width: auto;">
-                    <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
-                    <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
-                    <option value="15" {{ $perPage == 15 ? 'selected' : '' }}>15</option>
-                    <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
-                    <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25</option>
-                    <option value="30" {{ $perPage == 30 ? 'selected' : '' }}>30</option>
-                    <option value="35" {{ $perPage == 35 ? 'selected' : '' }}>35</option>
+                    @foreach([5, 10, 15, 20, 25, 30, 35] as $n)
+                        <option value="{{ $n }}" {{ $perPage == $n ? 'selected' : '' }}>{{ $n }}</option>
+                    @endforeach
                 </select>
             </form>
         </div>
@@ -54,6 +50,10 @@
                         @forelse($data as $guru)
                         <tr>
                             <td class="text-nowrap">
+                                <button type="button" class="badge bg-warning text-decoration-none border-0"
+                                    data-bs-toggle="modal" data-bs-target="#modalUser{{ $guru->id }}">
+                                    <i class="icon-user"></i>
+                                </button>
                                 <a href="{{ route('guru.show', $guru->id) }}" class="badge bg-success text-decoration-none">
                                     <i class="icon-eye-open"></i>
                                 </a>
@@ -93,9 +93,62 @@
             </div>
         </div>
 
+        {{-- Modal Penerbitan Akun: satu modal per guru --}}
+        @foreach($data as $guru)
+        <div class="modal fade" id="modalUser{{ $guru->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUserLabel{{ $guru->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="{{ route('auth.registrasi', $guru->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalUserLabel{{ $guru->id }}">Penerbitan Akun</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="username{{ $guru->id }}" class="form-label">Username</label>
+                                <input type="text"
+                                    name="username"
+                                    id="username{{ $guru->id }}"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    value="{{ old('username', $guru->nip) }}"
+                                    readonly>
+                                @error('username')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password{{ $guru->id }}" class="form-label">Password</label>
+                                <input type="password"
+                                    name="password"
+                                    id="password{{ $guru->id }}"
+                                    class="form-control"
+                                    autocomplete="new-password">
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Terbitkan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
         <div class="d-flex justify-content-end mt-3">
-            {{ $data->appends(['per_page' => $perPage])->links() }}
+            {{ $data->appends(['per_page' => $perPage, 'search' => $search])->links() }}
         </div>
     </div>
 </div>
+
 @endsection

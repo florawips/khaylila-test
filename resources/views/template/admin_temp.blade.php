@@ -1,9 +1,9 @@
     {{-- Mulai Header --}}
-    @include('landing.layout.header')
+    @include('admin.layout.header')
     {{-- Akhir Header --}}
 
     {{-- Mulai Navbar --}}
-    
+    @include('admin.layout.navbar')
     {{-- Akhir Navbar --}}
 
     {{-- Awal Konten --}}
@@ -11,5 +11,5 @@
     {{-- Akhir Konten --}}
 
      {{-- Awal JS --}}
-     @include('landing.layout.js')
+     @include('admin.layout.js')
     {{-- Akhir JS --}}

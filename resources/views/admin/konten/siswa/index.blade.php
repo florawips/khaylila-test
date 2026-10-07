@@ -10,7 +10,6 @@
 <div class="row konten-siswa">
     <div class="col-md-10 mx-auto">
         <h2 class="text-left mt-3 mb-4">Data Siswa</h2>
-
         <div class="d-flex justify-content-between align-items-center mb-3 toolbar-siswa">
             <a href="{{ route('siswa.create') }}" class="btn btn-primary btn-sm btn-tambah">
                 Tambah Data
@@ -25,13 +24,9 @@
 
                 <label for="per_page" class="me-2 mb-0 small text-muted">Tampilkan:</label>
                 <select name="per_page" id="per_page" onchange="this.form.submit()" class="form-select form-select-sm" style="width: auto;">
-                    <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
-                    <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
-                    <option value="15" {{ $perPage == 15 ? 'selected' : '' }}>15</option>
-                    <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
-                    <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25</option>
-                    <option value="30" {{ $perPage == 30 ? 'selected' : '' }}>30</option>
-                    <option value="35" {{ $perPage == 35 ? 'selected' : '' }}>35</option>
+                    @foreach([5, 10, 15, 20, 25, 30, 35] as $n)
+                        <option value="{{ $n }}" {{ $perPage == $n ? 'selected' : '' }}>{{ $n }}</option>
+                    @endforeach
                 </select>
             </form>
         </div>
@@ -57,10 +52,10 @@
                         @forelse($data as $siswa)
                         <tr>
                             <td class="text-nowrap">
-                                <button type="button" class="badge bg-warning text-decoration-none"
-                                    data-bs-toggle="modal" data-bs-target="#User{{ $siswa->id }}">
-                                    <i class="icon-user"></i>
-                                </button>
+                                <button type="button" class="badge bg-warning text-decoration-none border-0"
+                                data-bs-toggle="modal" data-bs-target="#modalUser{{ $siswa->id }}">
+                                <i class="icon-user"></i>
+                            </button>
                                 <a href="{{ route('siswa.edit', $siswa->id) }}" class="badge bg-info text-decoration-none">
                                     <i class="icon-pencil"></i>
                                 </a>
@@ -99,54 +94,76 @@
                 </table>
             </div>
         </div>
+        {{-- Modal Penerbitan Akun: satu modal per siswa --}}
+        @foreach($data as $siswa)
+        <div class="modal fade" id="modalUser{{ $siswa->id }}" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalUserLabel{{ $siswa->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="{{ route('auth.registrasi', $siswa->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-<div class="modal fade" id="User{{ $siswa->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="User{{ $siswa->id }}">Penerbitan Akun</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form
-            action="{{ route('auth.registrasi' $siswa->id) }}"
-            method="POST"
-            enctype="multipart/form-data"
-        >
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalUserLabel{{ $siswa->id }}">Penerbitan Akun</h5>
+                            <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
-                <label for="foto" class="form-label">
-                    Upload Foto
-                </label>
-                <img id="preview" src="#" alt="Preview Foto Kue" style="max-width: 300px; display: none; margin: 20px auto" />
-                <input
-                    type="file"
-                    name="foto"
-                    id="foto"
-                    class="form-control"
-                    accept="image/jpeg,image/png,image/jpg,image/webp"
-                    onchange="previewFoto(event)"
-                >
-                @error('foto')
-                    <div class="text-danger mt-1">
-                        {{ $message }}
-                    </div>
-                @enderror
+                        <div class="modal-body">
+                            <div class="mb-3 form-group">
+                                <label for="username{{ $siswa->id }}" class="form-label">Username</label>
+                                <input type="text"
+                                    name="username"
+                                    id="username{{ $siswa->id }}"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    value="{{ old('username', $siswa->nis) }}"
+                                    readonly>
+                                @error('username')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3 form-group">
+                                <label for="password{{ $siswa->id }}" class="form-label">Password</label>
+                                <input type="password"
+                                    name="password"
+                                    id="password{{ $siswa->id }}"
+                                    class="form-control"
+                                    autocomplete="new-password">
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Terbitkan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Upload</button>
-        </div>
-    </form>
-      </div>
-    </div>
-  </div>
+        @endforeach
+
         <div class="d-flex justify-content-end mt-3">
-            {{ $data->appends(['per_page' => $perPage])->links() }}
+            {{ $data->appends(['per_page' => $perPage, 'search' => $search])->links() }}
         </div>
     </div>
 </div>
+
+<script>
+function previewFoto(event, id) {
+    const preview = document.getElementById('preview' + id);
+    const file = event.target.files[0];
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+    }
+}
+</script>
 @endsection
