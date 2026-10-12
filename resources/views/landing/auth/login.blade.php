@@ -9,13 +9,20 @@
                 <div class="login">
                     <h4 class="login_register_title">Selamat Datang</h4>
                     <h5 class="login_register_title">Sistem Informasi Manajemen Kelas</h5>
+                    @if (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+                    <form method="POST" action="{{ route('auth.proses_login') }}">
+                        @csrf
                     <div class="form-group">
                         <input type="text" id="contact-name" class=" form-control requiredField input-label"
-                            placeholder="Username" name="name">
+                            placeholder="Username"autocomplete="off" name="username">
                     </div>
                     <div class="form-group">
                         <input type="password" id="contact-email" class="form-control requiredField input-label"
-                            placeholder="Enter Password" name="password">
+                            placeholder="Enter Password""autocomplete="off" name="password">
                     </div>
                     <div class="form-group col-md-25 mb-10">
                         <button class="btn btn-contact-bg" type="submit" name="submit">login</button>

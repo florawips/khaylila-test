@@ -23,6 +23,7 @@ Route::group(['prefix'=>'landing','as'=>'landing.'], function(){
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
     Route::get('/login', [AuthController::class, 'login']) ->name('login');
     Route::put('/registrasi/{id}', [AuthController::class, 'registrasi'])->name('registrasi');
+    Route::post('/proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
 });
 Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
     Route::get('/', [SiswaController::class, 'index'])->name('index');

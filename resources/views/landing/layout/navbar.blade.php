@@ -13,6 +13,7 @@
             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a class="badge badge-pill badge-success px-3 py-2" href="{{ route('auth.login') }}">
                     <span class="icon-user mr-1"></span> Login
+                </a></li>
                   </a>
              </li>             
             </ul>

@@ -66,4 +66,22 @@ class AuthController extends Controller
             ->back()
             ->with('error', 'Data akun gagal diterbitkan.');
     }
+
+    public function proses_login(Request $request){
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $query = User::where('username', $username)->first();
+
+        if ($query && Hash::check($password, $query->password)) {
+            $request->session()->put('user', $query); 
+            if( $query->role === 'guru'){
+                return redirect()->route('siswa.index');
+            }elseif($query->role === 'siswa'){
+                return redirect()->route('kegiatan.index');
+            }else {
+                return redirect()->back()->with('error', 'Username atau password salah.');
+            }
+        }
+    }
 }
