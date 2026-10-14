@@ -17,10 +17,10 @@
 
             <form action="{{ route('siswa.index') }}" method="GET" class="d-flex align-items-center">
                 <input type="text"
-                        name="search"
-                        value="{{ $search }}"
-                        class="form-control form-control-sm me-2"
-                        placeholder="Cari Nama/NIS/NISN....">
+                       name="search"
+                       value="{{ $search }}"
+                       class="form-control form-control-sm me-2"
+                       placeholder="Cari Nama/NIS/NISN....">
 
                 <label for="per_page" class="me-2 mb-0 small text-muted">Tampilkan:</label>
                 <select name="per_page" id="per_page" onchange="this.form.submit()" class="form-select form-select-sm" style="width: auto;">
@@ -53,9 +53,9 @@
                         <tr>
                             <td class="text-nowrap">
                                 <button type="button" class="badge bg-warning text-decoration-none border-0"
-                                data-bs-toggle="modal" data-bs-target="#modalUser{{ $siswa->id }}">
-                                <i class="icon-user"></i>
-                            </button>
+                                    data-bs-toggle="modal" data-bs-target="#modalUser{{ $siswa->id }}">
+                                    <i class="icon-user"></i>
+                                </button>
                                 <a href="{{ route('siswa.edit', $siswa->id) }}" class="badge bg-info text-decoration-none">
                                     <i class="icon-pencil"></i>
                                 </a>
@@ -94,65 +94,78 @@
                 </table>
             </div>
         </div>
-        {{-- Modal Penerbitan Akun: satu modal per siswa --}}
-        @foreach($data as $siswa)
-        <div class="modal fade" id="modalUser{{ $siswa->id }}" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalUserLabel{{ $siswa->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form action="{{ route('auth.registrasi', $siswa->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalUserLabel{{ $siswa->id }}">Penerbitan Akun</h5>
-                            <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="mb-3 form-group">
-                                <label for="username{{ $siswa->id }}" class="form-label">Username</label>
-                                <input type="text"
-                                    name="username"
-                                    id="username{{ $siswa->id }}"
-                                    class="form-control"
-                                    autocomplete="off"
-                                    value="{{ old('username', $siswa->nis) }}"
-                                    readonly>
-                                @error('username')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3 form-group">
-                                <label for="password{{ $siswa->id }}" class="form-label">Password</label>
-                                <input type="password"
-                                    name="password"
-                                    id="password{{ $siswa->id }}"
-                                    class="form-control"
-                                    autocomplete="new-password">
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Terbitkan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endforeach
 
         <div class="d-flex justify-content-end mt-3">
             {{ $data->appends(['per_page' => $perPage, 'search' => $search])->links() }}
         </div>
     </div>
 </div>
+
+{{-- Modal Penerbitan Akun: satu modal per siswa (di luar .row supaya tidak kena overflow/z-index container) --}}
+@foreach($data as $siswa)
+<div class="modal fade" id="modalUser{{ $siswa->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUserLabel{{ $siswa->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="{{ route('auth.registrasi', $siswa->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUserLabel{{ $siswa->id }}">Penerbitan Akun</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="username{{ $siswa->id }}" class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
+                               id="username{{ $siswa->id }}"
+                               class="form-control"
+                               autocomplete="off"
+                               value="{{ old('username', $siswa->nis) }}"
+                               readonly>
+                        @error('username')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nama{{ $siswa->id }}" class="form-label">Nama</label>
+                        <input type="text"
+                               name="nama"
+                               id="nama{{ $siswa->id }}"
+                               class="form-control"
+                               autocomplete="off"
+                               value="{{ old('nama', $siswa->nama_siswa) }}"
+                               readonly>
+                        @error('nama')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password{{ $siswa->id }}" class="form-label">Password</label>
+                        <input type="password"
+                               name="password"
+                               id="password{{ $siswa->id }}"
+                               class="form-control"
+                               autocomplete="new-password">
+                        @error('password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Terbitkan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 
 <script>
 function previewFoto(event, id) {

@@ -18,6 +18,20 @@
             <a class="nav-link active" aria-current="page"href="{{ route('kegiatan.index') }}">Kegiatan</a>
           </li>
         </ul>
+
+        <div class="d-flex">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+          </li>
+          <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>
+          </ul>
+        </div>
+  
       </div>
     </div>
 </nav>

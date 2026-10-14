@@ -45,6 +45,7 @@ class AuthController extends Controller
                 'username' => $username
             ],
             [
+                'nama' => $request->nama,
                 'password' => Hash::make($request->password),
                 'role' => $role,
             ]
@@ -67,21 +68,28 @@ class AuthController extends Controller
             ->with('error', 'Data akun gagal diterbitkan.');
     }
 
-    public function proses_login(Request $request){
+    public function proses_login(Request $request)
+    {
         $username = $request->input('username');
         $password = $request->input('password');
 
         $query = User::where('username', $username)->first();
 
         if ($query && Hash::check($password, $query->password)) {
-            $request->session()->put('user', $query); 
-            if( $query->role === 'guru'){
+            $request->session()->put('user', $query);
+
+            if ($query->role === 'guru') {
                 return redirect()->route('siswa.index');
-            }elseif($query->role === 'siswa'){
+            } elseif ($query->role === 'siswa') {
                 return redirect()->route('kegiatan.index');
-            }else {
-                return redirect()->back()->with('error', 'Username atau password salah.');
             }
         }
+        return redirect('/auth/login')->with('error', 'Username atau Password salah!');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('user');
+        return redirect()->route('landing.index');
     }
 }

@@ -18,10 +18,10 @@
 
             <form action="{{ route('guru.index') }}" method="GET" class="d-flex align-items-center">
                 <input type="text"
-                        name="search"
-                        value="{{ $search }}"
-                        class="form-control form-control-sm me-2"
-                        placeholder="Cari Nama/NIP....">
+                       name="search"
+                       value="{{ $search }}"
+                       class="form-control form-control-sm me-2"
+                       placeholder="Cari Nama/NIP....">
 
                 <label for="per_page" class="me-2 mb-0 small text-muted">Tampilkan:</label>
                 <select name="per_page" id="per_page" onchange="this.form.submit()" class="form-select form-select-sm" style="width: auto;">
@@ -93,62 +93,75 @@
             </div>
         </div>
 
-        {{-- Modal Penerbitan Akun: satu modal per guru --}}
-        @foreach($data as $guru)
-        <div class="modal fade" id="modalUser{{ $guru->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUserLabel{{ $guru->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form action="{{ route('auth.registrasi', $guru->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalUserLabel{{ $guru->id }}">Penerbitan Akun</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="username{{ $guru->id }}" class="form-label">Username</label>
-                                <input type="text"
-                                    name="username"
-                                    id="username{{ $guru->id }}"
-                                    class="form-control"
-                                    autocomplete="off"
-                                    value="{{ old('username', $guru->nip) }}"
-                                    readonly>
-                                @error('username')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password{{ $guru->id }}" class="form-label">Password</label>
-                                <input type="password"
-                                    name="password"
-                                    id="password{{ $guru->id }}"
-                                    class="form-control"
-                                    autocomplete="new-password">
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Terbitkan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endforeach
-
         <div class="d-flex justify-content-end mt-3">
             {{ $data->appends(['per_page' => $perPage, 'search' => $search])->links() }}
         </div>
     </div>
 </div>
 
+{{-- Modal Penerbitan Akun: satu modal per guru (di luar .row supaya tidak kena overflow/z-index container) --}}
+@foreach($data as $guru)
+<div class="modal fade" id="modalUser{{ $guru->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUserLabel{{ $guru->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="{{ route('auth.registrasi', $guru->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUserLabel{{ $guru->id }}">Penerbitan Akun</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="username{{ $guru->id }}" class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
+                               id="username{{ $guru->id }}"
+                               class="form-control"
+                               autocomplete="off"
+                               value="{{ old('username', $guru->nip) }}"
+                               readonly>
+                        @error('username')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nama{{ $guru->id }}" class="form-label">Nama</label>
+                        <input type="text"
+                               name="nama"
+                               id="nama{{ $guru->id }}"
+                               class="form-control"
+                               autocomplete="off"
+                               value="{{ old('nama', $guru->nama_guru) }}"
+                               readonly>
+                        @error('nama')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password{{ $guru->id }}" class="form-label">Password</label>
+                        <input type="password"
+                               name="password"
+                               id="password{{ $guru->id }}"
+                               class="form-control"
+                               autocomplete="new-password">
+                        @error('password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Terbitkan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
