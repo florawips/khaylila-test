@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kegiatan;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
     // GET
-  public function index()
-  {
-    $siswa = Siswa::all();
-    return view('landing.konten.index', compact('siswa'));
-  }
+    public function index()
+    {
+        // Ambil data kegiatan dari database (sesuaikan dengan model Anda)
+        $kegiatan = Kegiatan::with('foto')->get(); 
+        $siswa = Siswa::with('foto')->get();
+    
+        // Kirim variabel $kegiatan menggunakan compact() atau array
+        return view('landing.konten.index', compact('kegiatan','siswa'));
+    }
    // POST
    public function store(Request $request)
    {
@@ -37,4 +42,5 @@ class LandingController extends Controller
    {
     return view('test-route');
    }
+   
 }

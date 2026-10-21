@@ -14,4 +14,10 @@ class Kegiatan extends Model
     public function siswa(){
         return $this->belongsTo(Siswa::class);
     }
+
+    public function foto()
+    {
+        return $this->morphOne(Foto::class, 'imageable');
+    }
+    
 }

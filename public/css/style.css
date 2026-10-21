@@ -360,3 +360,41 @@
     color: #333;
     border-color: #eef0f5;
 }
+/* ===== UPLOAD FOTO (form kegiatan) ===== */
+.form-card input[type="file"].form-control {
+    padding: 0.45rem 0.85rem;
+    background: #f8faff;
+    border: 1.5px dashed #b6c8f5;
+}
+
+.form-card input[type="file"].form-control:hover {
+    border-color: #4895ef;
+    background: #f0f5ff;
+}
+
+.form-card input[type="file"]::file-selector-button {
+    background: linear-gradient(90deg, #4361ee, #4895ef);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.35rem 0.9rem;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.form-card .img-thumbnail {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+.form-card .invalid-feedback {
+    font-size: 0.8rem;
+}
+/* ===== FOTO DI HALAMAN DETAIL ===== */
+.detail-table .img-thumbnail {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}

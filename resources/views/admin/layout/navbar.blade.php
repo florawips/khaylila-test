@@ -27,18 +27,26 @@
             <a class="nav-link {{ request()->routeIs('jadwal.*') ? 'active' : '' }}" href="{{ route('jadwal.index') }}">Jadwal Pelajaran</a>
           </li>
         </ul>
-        <div class="d-flex">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            Logout
+       <div class="d-flex">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ session('user')['nama'] }}
           </a>
-          </li>
-          <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+            <a class="dropdown-item"  href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+            </a>
+            </li>
+            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
             @csrf
-          </form>
+            </form>
           </ul>
-        </div>
+        </li>
+        </ul>
+      </div>
+
   
       </div>
     </div>
